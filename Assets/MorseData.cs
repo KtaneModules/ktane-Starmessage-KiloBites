@@ -19,6 +19,7 @@ public static class MorseData
         { 'コ', "-----" },
         { 'サ', "-.-.-" },
         { 'シ', "--.-." },
+        { 'ス', "---.-" },
         { 'セ', ".---." },
         { 'ソ', "---." },
         { 'タ', "-." },
@@ -51,18 +52,15 @@ public static class MorseData
         { 'ロ', ".-.-" },
         { 'ワ', "-.-" },
         { 'ン', ".-.-." },
+        { 'ー', ".--.-" },
         { 'ヲ', ".---" },
-    };
-
-    public static readonly Dictionary<char, string> morseTranslationSpecial = new Dictionary<char, string>()
-    {
-        { 'ボ', "-...." },
-        { 'ゾ', "---..." },
-        { 'ヅ', ".--..." },
-        { 'ビ', "--.--.." },
-        { 'ゴ', "-----.." },
-        { 'パ', "-.....--." },
-        { 'ペ', "...--." }
+        { 'ボ', "-.. .." },
+        { 'ゾ', "---. .." },
+        { 'ヅ', ".--. .." },
+        { 'ビ', "--.-- .." },
+        { 'ゴ', "----- .." },
+        { 'パ', "-... ..--." },
+        { 'ペ', ". ..--." }
     };
 
     public static string generateSequence(char ch)
@@ -71,11 +69,24 @@ public static class MorseData
 
         foreach (char unit in morseTranslation[ch])
         {
-            output += unit == '-' ? "xxx" : "x";
+            output += unit == ' ' ? ".." : unit == '-' ? "xxx" : "x";
             output += ".";
         }
 
         return output + "..";
+    }
+
+    public static string generateSequenceInput(char ch)
+    {
+        string output = string.Empty;
+
+        foreach (char unit in morseTranslation[ch])
+        {
+            output += unit == '-' ? "-" : ".";
+            output += " ";
+        }
+
+        return output;
     }
 
 }
