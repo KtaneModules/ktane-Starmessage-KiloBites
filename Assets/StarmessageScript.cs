@@ -159,24 +159,16 @@ public class StarmessageScript : MonoBehaviour {
 		return '?';
 	}
 
-	private bool noCopyright;
 
-	class StarmessageSettings
-	{
-		public bool NoCopyright = false;
-	}
 
-	private StarmessageSettings StarSettings = new StarmessageSettings();
+
 
 
     void Awake()
     {
-		ModConfig<StarmessageSettings> config = new ModConfig<StarmessageSettings>("StarmessageSettings");
-		StarSettings = config.Read();
-		config.Write(StarSettings);
-		noCopyright = StarSettings.NoCopyright;
 
 		moduleId = moduleIdCounter++;
+
 
 		foreach (KMSelectable button in buttons)
 		{
@@ -362,7 +354,7 @@ public class StarmessageScript : MonoBehaviour {
 						}
 						else
 						{
-							StartCoroutine(noCopyright ? noCopyrightSolve() : solveAnimation());
+							StartCoroutine(solveAnimation());
 							Debug.LogFormat("[Starmessage #{0}] All inputs are correct! Solved!", moduleId);
 						}
 					}
@@ -404,48 +396,6 @@ public class StarmessageScript : MonoBehaviour {
         strikeLog("The time has ran out!");
 
     }
-
-	IEnumerator noCopyrightSolve()
-	{
-		yield return null;
-
-		timerBarLED.material = unlit;
-		timeBar.transform.localScale = origTimer;
-
-		for (int i = 0; i < 4; i++)
-		{
-			StopCoroutine(flashes[i]);
-			starLEDS[i].material = unlit;
-			flashes[i] = StartCoroutine(slowDown(i));
-		}
-
-		foreach (var obj in morseObj)
-		{
-			obj.SetActive(false);
-		}
-
-		foreach (var render in buttonObj)
-		{
-			render.material = solveGreen;
-		}
-
-		foreach (var text in buttonText)
-		{
-			text.text = "G";
-		}
-
-		for (int i = 0; i < 4; i++)
-		{
-			while (starSpeed[i] > 0)
-			{
-				yield return new WaitForSeconds(0.01f);
-			}
-		}
-
-		moduleSolved = true;
-		Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.CorrectChime, transform);
-		Module.HandlePass();
-	}
 
 	IEnumerator solveAnimation()
 	{
