@@ -65,7 +65,6 @@ public class StarmessageScript : MonoBehaviour {
 	private string[] morseTranslation = new string[4];
 	private int[] pointers = new int[4];
 	private float flashSpeed = 0.25f;
-	private bool coolDown;
 	private Coroutine timer, striked;
 
 	private int stage = 0;
