@@ -1963,7 +1963,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 84010900879048043b484c3146ab6225, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4291743438
+    rgba: 4278190080
 --- !u!102 &102911969082393658
 TextMesh:
   serializedVersion: 3
@@ -1984,7 +1984,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 84010900879048043b484c3146ab6225, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4291743438
+    rgba: 4278190080
 --- !u!114 &114002118619516172
 MonoBehaviour:
   m_ObjectHideFlags: 1
