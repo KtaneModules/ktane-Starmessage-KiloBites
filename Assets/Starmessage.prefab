@@ -1780,7 +1780,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439588861344186}
-  m_Mesh: {fileID: 4300000, guid: cde7bc8cdf909574f8c703dce1c326a4, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f5bb61263f450e1498cd325c7a1a5a7d, type: 3}
 --- !u!33 &33579484927631330
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1963,7 +1963,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 84010900879048043b484c3146ab6225, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4291743438
+    rgba: 4278190080
 --- !u!102 &102911969082393658
 TextMesh:
   serializedVersion: 3
@@ -1984,7 +1984,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 84010900879048043b484c3146ab6225, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4291743438
+    rgba: 4278190080
 --- !u!114 &114002118619516172
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -570,7 +570,7 @@ public class StarmessageScript : MonoBehaviour {
 
 
 #pragma warning disable 414
-	private readonly string TwitchHelpMessage = @"Use <!{0} foobar> to do something.";
+	private readonly string TwitchHelpMessage = @"!{0} .- inputs the morse code.";
 #pragma warning restore 414
 
 	IEnumerator ProcessTwitchCommand (string command)

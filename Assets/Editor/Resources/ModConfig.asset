@@ -17,7 +17,10 @@ MonoBehaviour:
   description: 'I''m the fastest man alive.
 
 
-    Determine the scrambled word in Japanese morse code and input 3 characters quickly.'
+    Determine the scrambled word in Japanese morse code and input 3 characters quickly.
+
+
+    Manual made by cerulean, implemented by Kilo Bites'
   version: 1
   outputFolder: build
-  previewImage: {fileID: 0}
+  previewImage: {fileID: 2800000, guid: 4df8640f511751c4ebaa66da212cdc42, type: 3}
