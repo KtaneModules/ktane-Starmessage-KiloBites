@@ -510,7 +510,7 @@ public class StarmessageScript : MonoBehaviour {
 
         for (int i = 0; i < 4; i++)
         {
-            starLEDS[i].material = i == 0 || i == 3 ? solveGreen : unlit;
+            starLEDS[i].material = i == 1 || i == 2 ? solveGreen : unlit;
         }
 		morseObj[flipped ? 1 : 0].SetActive(false);
 		buttonObj[0].material = solveGreen;
