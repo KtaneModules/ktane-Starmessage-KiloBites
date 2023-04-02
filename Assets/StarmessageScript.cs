@@ -601,6 +601,7 @@ public class StarmessageScript : MonoBehaviour {
 			if (striked != null)
 			{
 				yield return "strike";
+				yield break;
 			}
             buttons[numsToPress[i]].OnInteract();
 			yield return new WaitForSeconds(0.1f);
