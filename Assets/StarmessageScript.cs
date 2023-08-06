@@ -381,7 +381,7 @@ public class StarmessageScript : MonoBehaviour {
 			timeBar.transform.localScale = origTimer;
 		}
 
-		float current = 0, max = 4;
+		float current = 0, max = TwitchPlaysActive ? 10 : 4;
 
 		timerBarLED.material = lit;
 
@@ -568,14 +568,17 @@ public class StarmessageScript : MonoBehaviour {
 
 	// Twitch Plays
 
+	bool TwitchPlaysActive;
 
 #pragma warning disable 414
-	private readonly string TwitchHelpMessage = @"!{0} .- inputs the morse code.";
+	private readonly string TwitchHelpMessage = @"!{0} .- inputs the morse code. Chain command is only possible with spaces.";
 #pragma warning restore 414
 
 	IEnumerator ProcessTwitchCommand (string command)
     {
 		yield return null;
+
+		string[] split = command.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
 		if (striked != null)
 		{
@@ -583,29 +586,32 @@ public class StarmessageScript : MonoBehaviour {
 			yield break;
 		}
 
-		if (!command.Any(x => ".-".Contains(x)))
+		if (split.Length > 3 || split.Length > 3 - (stage + 1))
 		{
-			yield return "sendtochaterror Please reinput your morse string!";
-			yield break;
-		}
-		else if (command.Length > 5)
-		{
-			yield return "sendtochatterror Morse length cannot go over 5!";
 			yield break;
 		}
 
-		int[] numsToPress = command.Select(x => flipped ? "-.".IndexOf(x) : ".-".IndexOf(x)).ToArray();
-
-		for (int i = 0; i < numsToPress.Length; i++)
+		for (int i = 0; i < split.Length; i++)
 		{
-			if (striked != null)
+			if (split[i].Any(x => !".-".Contains(x)))
 			{
-				yield return "strike";
+				yield return "sendtochaterror Please reinput your morse!";
 				yield break;
 			}
-            buttons[numsToPress[i]].OnInteract();
-			yield return new WaitForSeconds(0.1f);
-        }
+		}
+
+		var ix = flipped ? "-." : ".-";
+
+		for (int i = 0; i < split.Length; i++)
+		{
+			for (int j = 0; j < split[i].Length; j++)
+			{
+				buttons[ix.IndexOf(split[i][j])].OnInteract();
+				yield return new WaitForSeconds(0.1f);
+			}
+		}
+
+
     }
 
 	IEnumerator TwitchHandleForcedSolve()
