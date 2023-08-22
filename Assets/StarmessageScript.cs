@@ -571,12 +571,11 @@ public class StarmessageScript : MonoBehaviour {
 	bool TwitchPlaysActive;
 
 #pragma warning disable 414
-	private readonly string TwitchHelpMessage = @"!{0} .- inputs the morse code. Chain command is only possible with spaces.";
+	private readonly string TwitchHelpMessage = @"!{0} .- inputs the morse code. You can only input all three morse code inputs with spaces.";
 #pragma warning restore 414
 
 	IEnumerator ProcessTwitchCommand (string command)
     {
-		yield return null;
 
 		string[] split = command.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -586,27 +585,31 @@ public class StarmessageScript : MonoBehaviour {
 			yield break;
 		}
 
-		if (split.Length > 3 || split.Length > 3 - (stage + 1))
+		if (split.Length != 3)
 		{
+			yield return "sendtochaterror Please input all three morse code inputs with spaces!";
 			yield break;
 		}
 
-		for (int i = 0; i < split.Length; i++)
+		foreach (var inp in split)
 		{
-			if (split[i].Any(x => !".-".Contains(x)))
+			foreach (var ch in inp)
 			{
-				yield return "sendtochaterror Please reinput your morse!";
-				yield break;
+				if (!".-".Contains(ch))
+				{
+					yield return "sendtochaterror Your input doesn't contain any dots or dashes. Please try again!";
+					yield break;
+				}
 			}
 		}
 
-		var ix = flipped ? "-." : ".-";
+		yield return null;
 
-		for (int i = 0; i < split.Length; i++)
+		for (int i = 0; i < 3; i++)
 		{
-			for (int j = 0; j < split[i].Length; j++)
+			foreach (var input in split[i])
 			{
-				buttons[ix.IndexOf(split[i][j])].OnInteract();
+				buttons[(flipped ? "-." : ".-").IndexOf(input)].OnInteract();
 				yield return new WaitForSeconds(0.1f);
 			}
 		}
